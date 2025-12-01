@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" name-as-sort-order="all" sort-separator=" " demote-non-dropping-particle="never" initialize-with=" " initialize-with-hyphen="false" page-range-format="expanded" default-locale="zh-CN">
+  <info>
+    <title>中国科学: 生命科学（定制版）</title>
+    <id>http://www.zotero.org/styles/science-china-life-sciences-custom</id>
+    <link href="http://www.zotero.org/styles/science-china-life-sciences-custom" rel="self"/>
+    <link href="http://lifecn.scichina.com" rel="documentation"/>
+    <author>
+      <name>Custom Style</name>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="biology"/>
+    <summary>《中国科学: 生命科学》期刊定制样式，基于官网要求和已发表文章格式</summary>
+    <updated>2025-12-01T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  
+  <locale xml:lang="zh-CN">
+    <terms>
+      <term name="et-al">et al.</term>
+      <term name="and">and</term>
+      <term name="page-range-delimiter">–</term>
+      <term name="citation-range-delimiter">~</term>
+    </terms>
+  </locale>
+  
+  <locale>
+    <date form="numeric">
+      <date-part name="year" range-delimiter="/"/>
+      <date-part name="month" form="numeric-leading-zeros" prefix="-" range-delimiter="/"/>
+      <date-part name="day" form="numeric-leading-zeros" prefix="-" range-delimiter="/"/>
+    </date>
+    <terms>
+      <term name="page-range-delimiter">–</term>
+    </terms>
+  </locale>
+  
+  <!-- 主要责任者 -->
+  <macro name="author">
+    <names variable="author">
+      <name>
+        <name-part name="family"/>
+      </name>
+      <substitute>
+        <names variable="composer"/>
+        <names variable="illustrator"/>
+        <names variable="director"/>
+        <choose>
+          <if variable="container-title" match="none">
+            <names variable="editor"/>
+          </if>
+        </choose>
+      </substitute>
+    </names>
+  </macro>
+  
+  <!-- 题名 -->
+  <macro name="title">
+    <text variable="title"/>
+  </macro>
+  
+  <!-- 期刊名称（使用缩写） -->
+  <macro name="container-title">
+    <choose>
+      <if variable="container-title-short">
+        <text variable="container-title-short"/>
+      </if>
+      <else>
+        <text variable="container-title"/>
+      </else>
+    </choose>
+  </macro>
+  
+  <!-- 出版年份 -->
+  <macro name="issued-year">
+    <choose>
+      <if variable="issued">
+        <choose>
+          <if is-uncertain-date="issued">
+            <date variable="issued" form="numeric" date-parts="year" prefix="[" suffix="]"/>
+          </if>
+          <else>
+            <date variable="issued" form="numeric" date-parts="year"/>
+          </else>
+        </choose>
+      </if>
+      <else>
+        <date variable="accessed" form="numeric" date-parts="year" prefix="[" suffix="]"/>
+      </else>
+    </choose>
+  </macro>
+  
+  <!-- 出版日期 -->
+  <macro name="issued-date">
+    <date variable="issued" form="numeric"/>
+  </macro>
+  
+  <!-- 引用日期（仅网页） -->
+  <macro name="accessed-date">
+    <choose>
+      <if type="webpage">
+        <date variable="accessed" form="numeric" prefix="[" suffix="]"/>
+      </if>
+    </choose>
+  </macro>
+  
+  <!-- 获取和访问路径（仅网页） -->
+  <macro name="access">
+    <choose>
+      <if type="webpage">
+        <text variable="URL"/>
+      </if>
+    </choose>
+  </macro>
+  
+  <!-- 期刊文章布局 -->
+  <macro name="article-journal">
+    <group delimiter=". ">
+      <text macro="author"/>
+      <text macro="title"/>
+    </group>
+    <group delimiter=", " prefix=" ">
+      <text macro="container-title"/>
+      <text macro="issued-year"/>
+      <group delimiter=": ">
+        <text variable="volume"/>
+        <text variable="page"/>
+      </group>
+    </group>
+  </macro>
+  
+  <!-- 书籍布局 -->
+  <macro name="book">
+    <group delimiter=". ">
+      <text macro="author"/>
+      <text macro="title"/>
+      <group delimiter=": ">
+        <group delimiter=", ">
+          <group delimiter=": ">
+            <text variable="publisher-place"/>
+            <text variable="publisher"/>
+          </group>
+          <text macro="issued-year"/>
+        </group>
+        <text variable="page"/>
+      </group>
+    </group>
+  </macro>
+  
+  <!-- 书籍章节布局 -->
+  <macro name="chapter">
+    <group delimiter=". ">
+      <text macro="author"/>
+      <text macro="title"/>
+    </group>
+    <group delimiter=". " prefix=". In: ">
+      <names variable="editor">
+        <name>
+          <name-part name="family"/>
+        </name>
+        <label form="short" prefix=", "/>
+      </names>
+      <text variable="container-title"/>
+      <group delimiter=": ">
+        <group delimiter=", ">
+          <group delimiter=": ">
+            <text variable="publisher-place"/>
+            <text variable="publisher"/>
+          </group>
+          <text macro="issued-year"/>
+        </group>
+        <text variable="page"/>
+      </group>
+    </group>
+  </macro>
+  
+  <!-- 学位论文布局 -->
+  <macro name="thesis">
+    <group delimiter=". ">
+      <text macro="author"/>
+      <text macro="title"/>
+      <group delimiter=": ">
+        <text variable="publisher-place"/>
+        <text variable="publisher"/>
+      </group>
+      <text macro="issued-year"/>
+    </group>
+  </macro>
+  
+  <!-- 专利布局 -->
+  <macro name="patent">
+    <group delimiter=". ">
+      <text macro="author"/>
+      <text macro="title"/>
+      <text variable="number"/>
+      <text macro="issued-date"/>
+    </group>
+  </macro>
+  
+  <!-- 网页布局 -->
+  <macro name="webpage">
+    <group delimiter=". ">
+      <text macro="author"/>
+      <text macro="title"/>
+      <text macro="issued-date" prefix="(" suffix=")"/>
+      <text macro="accessed-date"/>
+      <text macro="access"/>
+    </group>
+  </macro>
+  
+  <!-- 正文引用格式：上标[1]、[1,2]、[1~3] -->
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout prefix="[" suffix="]" delimiter="," vertical-align="sup">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+  
+  <!-- 参考文献列表格式 -->
+  <bibliography entry-spacing="0" et-al-min="4" et-al-use-first="3" hanging-indent="true">
+    <layout>
+      <text variable="citation-number" prefix="[" suffix="] "/>
+      <choose>
+        <if type="article-journal article-magazine">
+          <text macro="article-journal"/>
+        </if>
+        <else-if type="book">
+          <text macro="book"/>
+        </else-if>
+        <else-if type="chapter paper-conference">
+          <text macro="chapter"/>
+        </else-if>
+        <else-if type="thesis">
+          <text macro="thesis"/>
+        </else-if>
+        <else-if type="patent">
+          <text macro="patent"/>
+        </else-if>
+        <else-if type="webpage post post-weblog">
+          <text macro="webpage"/>
+        </else-if>
+        <else>
+          <text macro="article-journal"/>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
