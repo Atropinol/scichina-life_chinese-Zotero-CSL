@@ -119,7 +119,7 @@
       <text macro="author"/>
       <text macro="title"/>
     </group>
-    <group delimiter=", " prefix=" ">
+    <group delimiter=", " prefix=". ">
       <text macro="container-title"/>
       <text macro="issued-year"/>
       <group delimiter=": ">
